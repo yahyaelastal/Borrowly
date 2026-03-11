@@ -9,16 +9,18 @@ Borrowly is a peer-to-peer rental marketplace designed to maximize the utility o
 
 ## Informal User Stories
 ### 1. The Owner (Handyman / Homeowner)
-- Story A: A professional worker has expensive power tools that sit idle in his garage during the weekends. He wants to upload photos and set a daily price for his equipment so that he can generate passive income from gear he already owns.
+- Story A: As a professional worker, I want to upload photos and set a daily price for my idle power tools so that I can generate passive income from gear I already own.
 
-- Story B: A father owns a high-end camping tent that his family only uses once a year. He wants to list it on a secure platform so he can track who is using it and when, ensuring his investment is being put to good use instead of gathering dust.
+- Story B: As an equipment owner, I want to list my high-end camping tent on a secure platform so that I can track who is using it and ensure my investment is put to good use instead of gathering dust.
 
 ### 2. The Renter (Student / Casual User)
-- Story A: A student needs a professional camera stabilizer for a 48-hour film project but cannot afford the high retail price. He wants to browse local listings and book the item for just two days so he can pass his class without overspending.
 
-- Story B: A person living in a small apartment needs a heavy-duty ladder for a one-day home repair. He wants to rent it from a neighbor for a small fee so he doesn't have to worry about finding storage space for a bulky item he will rarely use.
+- Story A: As a student, I want to browse local listings and book a professional camera stabilizer for two days so that I can complete my film project and pass my class without overspending.
+
+- Story B: As an apartment renter, I want to rent a heavy-duty ladder from a neighbor for a one-day repair so that I do not have to find storage space for a bulky item I will rarely use.
 
 ### 3. The Admin (Platform Manager)
-- Story A: The administrator needs to ensure the marketplace remains a safe and professional environment. They want to manage user accounts and have the power to remove listings that contain inappropriate content or violate community safety standards.
 
-- Story B: As the platform grows, the administrator needs to update the database categories and manage global settings. They want to adjust the list of available item types (e.g., adding "Electric Vehicles") to ensure the site stays organized and up to date.
+- Story A: As a platform administrator, I want to manage user accounts and remove inappropriate listings so that I can ensure the marketplace remains a safe and professional environment.
+
+- Story B: As a platform administrator, I want to update database categories and add new item types so that the site stays organized and up to date as the platform grows.
