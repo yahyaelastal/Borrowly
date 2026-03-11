@@ -5,6 +5,7 @@ Borrowly is a peer-to-peer rental marketplace designed to maximize the utility o
 ## Team Members
 - Elastal Yahya (yahia.elastal@stud.fils.upb.ro)
 - Alsalman Ahmad (aal2@stud.fils.upb.ro)
+- Aktas Furkan Said (furkan_said.aktas@stud.fils.upb.ro)
 
 ## Informal User Stories
 ### 1. The Owner (Handyman / Homeowner)
