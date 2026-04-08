@@ -24,3 +24,8 @@ Borrowly is a peer-to-peer rental marketplace designed to maximize the utility o
 - Story A: As a platform administrator, I want to manage user accounts and remove inappropriate listings so that I can ensure the marketplace remains a safe and professional environment.
 
 - Story B: As a platform administrator, I want to update database categories and add new item types so that the site stays organized and up to date as the platform grows.
+
+
+
+##Figma Design: https://glass-chuck-23706870.figma.site/
+
