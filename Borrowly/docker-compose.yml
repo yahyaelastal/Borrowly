@@ -1,0 +1,36 @@
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:16-alpine
+    container_name: borrowly-db
+    environment:
+      POSTGRES_DB: borrowly
+      POSTGRES_USER: borrowly
+      POSTGRES_PASSWORD: borrowly123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U borrowly"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # Spring Boot Application
+  app:
+    build: .
+    container_name: borrowly-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/borrowly
+      SPRING_DATASOURCE_USERNAME: borrowly
+      SPRING_DATASOURCE_PASSWORD: borrowly123
+
+volumes:
+  postgres_data:
