@@ -27,11 +27,18 @@ public class HomeController {
     }
 
     @GetMapping("/search")
-    public String search(@RequestParam(value = "q", required = false) String query, Model model) {
-        List<Item> items = itemService.searchItems(query);
+    public String search(
+            @RequestParam(value = "q", required = false) String query,
+            @RequestParam(value = "category", required = false) String category,
+            @RequestParam(value = "maxPrice", required = false) Double maxPrice,
+            Model model) {
+
+        List<Item> items = itemService.searchWithFilters(query, category, maxPrice);
         model.addAttribute("items", items);
         model.addAttribute("itemCount", items.size());
         model.addAttribute("searchQuery", query);
+        model.addAttribute("selectedCategory", category);
+        model.addAttribute("selectedMaxPrice", maxPrice);
         return "index";
     }
 }

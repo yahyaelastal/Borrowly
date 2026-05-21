@@ -54,6 +54,13 @@ public class ItemService {
                         query, query, query);
     }
 
+    public List<Item> searchWithFilters(String query, String category, Double maxPrice) {
+        return itemRepository.findWithFilters(
+                (query != null && query.trim().isEmpty()) ? null : query,
+                (category != null && category.trim().isEmpty()) ? null : category,
+                maxPrice);
+    }
+
     /**
      * Delete an item only if the requesting user is the owner.
      *
@@ -66,5 +73,12 @@ public class ItemService {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Delete an item bypassing ownership check (Admin only).
+     */
+    public void deleteItemAdmin(Long itemId) {
+        itemRepository.deleteById(itemId);
     }
 }

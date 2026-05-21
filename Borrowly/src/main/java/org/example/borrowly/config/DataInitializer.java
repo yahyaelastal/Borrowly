@@ -9,7 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
- * Seeds the database with sample data on startup if no users exist.
+ * Seeds the database with the admin account and sample data on startup.
  */
 @Component
 public class DataInitializer implements CommandLineRunner {
@@ -27,8 +27,21 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // Only seed if database is empty
-        if (userRepository.count() > 0) {
+        // --- Step 1: Create admin account if it doesn't exist ---
+        String adminEmail = "admin@borrowly.com";
+        if (!userRepository.existsByEmail(adminEmail)) {
+            User admin = new User();
+            admin.setFullName("System Admin");
+            admin.setEmail(adminEmail);
+            admin.setPassword(passwordEncoder.encode("admin123"));
+            admin.setRole("ROLE_ADMIN");
+            userRepository.save(admin);
+            System.out.println("Default Admin account created: " + adminEmail);
+        }
+
+        // --- Step 2: Seed sample data only if no regular users exist yet ---
+        // count() > 1 means there's already the admin + at least one regular user
+        if (userRepository.count() > 1) {
             return;
         }
 

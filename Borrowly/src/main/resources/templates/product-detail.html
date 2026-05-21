@@ -152,7 +152,7 @@
                                 <div class="grid grid-cols-2 gap-4">
                                     <div>
                                         <label class="text-sm font-medium mb-1 block">Start Date</label>
-                                        <input type="date" id="start-date" name="startDate" required class="flex h-12 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" onchange="calculatePrice()">
+                                        <input type="date" id="start-date" name="startDate" required class="flex h-12 w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" onchange="updateEndDateMin(); calculatePrice()">
                                     </div>
                                     <div>
                                         <label class="text-sm font-medium mb-1 block">End Date</label>
@@ -213,6 +213,18 @@
       lucide.createIcons();
 
       const pricePerDay = [[${item.pricePerDay}]];
+
+      // Set minimum date to today (prevent past dates)
+      const today = new Date().toISOString().split('T')[0];
+      document.getElementById('start-date').setAttribute('min', today);
+      document.getElementById('end-date').setAttribute('min', today);
+
+      function updateEndDateMin() {
+          const startVal = document.getElementById('start-date').value;
+          if (startVal) {
+              document.getElementById('end-date').setAttribute('min', startVal);
+          }
+      }
 
       function calculatePrice() {
           const startDate = document.getElementById('start-date').value;

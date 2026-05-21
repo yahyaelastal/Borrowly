@@ -85,4 +85,12 @@ public class RentalService {
         rentalRepository.save(rental);
         return true;
     }
+
+    public List<Rental> getAllRentals() {
+        return rentalRepository.findAll();
+    }
+
+    public void deleteRentalAdmin(Long rentalId) {
+        rentalRepository.deleteById(rentalId);
+    }
 }

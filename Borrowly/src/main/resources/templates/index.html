@@ -74,6 +74,7 @@
                 </a>
                 <div class="flex items-center gap-4">
                     <!-- Show when logged in -->
+                    <a sec:authorize="hasAuthority('ROLE_ADMIN')" th:href="@{/admin}" class="text-sm font-medium text-destructive hover:text-red-700">Admin Panel</a>
                     <a sec:authorize="isAuthenticated()" th:href="@{/items/new}" class="text-sm font-medium hover:text-primary">Lend Item</a>
                     <a sec:authorize="isAuthenticated()" th:href="@{/dashboard}" class="text-sm font-medium hover:text-primary">Dashboard</a>
                     <form sec:authorize="isAuthenticated()" th:action="@{/logout}" method="post" class="inline">
@@ -97,17 +98,45 @@
                         Discover thousands of items available for rent in your neighborhood
                     </p>
 
-                    <!-- Search Bar -->
+                    <!-- Search & Filter Bar -->
                     <div class="bg-card rounded-xl shadow-lg border-2 border-border p-4 md:p-6 text-left">
-                        <form th:action="@{/search}" method="GET" class="grid grid-cols-1 md:grid-cols-12 gap-3">
-                            <div class="md:col-span-10 relative">
-                                <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"></i>
-                                <input type="text" name="q" th:value="${searchQuery}" placeholder="What are you looking for?" class="w-full pl-10 pr-3 h-12 border-2 border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent">
+                        <form th:action="@{/search}" method="GET">
+                            <!-- Search row -->
+                            <div class="grid grid-cols-1 md:grid-cols-12 gap-3 mb-3">
+                                <div class="md:col-span-10 relative">
+                                    <i data-lucide="search" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"></i>
+                                    <input type="text" name="q" th:value="${searchQuery}" placeholder="What are you looking for?"
+                                           class="w-full pl-10 pr-3 h-12 border-2 border-border rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <button type="submit" class="w-full h-12 bg-primary hover:bg-accent text-primary-foreground rounded-md flex items-center justify-center gap-2 transition-colors font-medium">
+                                        <i data-lucide="search" class="h-4 w-4"></i> Search
+                                    </button>
+                                </div>
                             </div>
-                            <div class="md:col-span-2">
-                                <button type="submit" class="w-full h-12 bg-primary hover:bg-accent text-primary-foreground rounded-md flex items-center justify-center transition-colors">
-                                    <i data-lucide="search" class="h-5 w-5"></i>
-                                </button>
+                            <!-- Filter row -->
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-3 border-t border-border">
+                                <div class="relative">
+                                    <i data-lucide="tag" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none"></i>
+                                    <select name="category"
+                                            class="w-full pl-10 pr-3 h-10 border-2 border-border rounded-md bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent appearance-none">
+                                        <option value="" th:selected="${selectedCategory == null or selectedCategory == ''}">All Categories</option>
+                                        <option value="Photography"  th:selected="${selectedCategory == 'Photography'}">Photography</option>
+                                        <option value="Tools"        th:selected="${selectedCategory == 'Tools'}">Tools</option>
+                                        <option value="Outdoor"      th:selected="${selectedCategory == 'Outdoor'}">Outdoor</option>
+                                        <option value="Sports"       th:selected="${selectedCategory == 'Sports'}">Sports</option>
+                                        <option value="Electronics"  th:selected="${selectedCategory == 'Electronics'}">Electronics</option>
+                                        <option value="Vehicles"     th:selected="${selectedCategory == 'Vehicles'}">Vehicles</option>
+                                        <option value="Music"        th:selected="${selectedCategory == 'Music'}">Music</option>
+                                        <option value="Other"        th:selected="${selectedCategory == 'Other'}">Other</option>
+                                    </select>
+                                </div>
+                                <div class="relative">
+                                    <i data-lucide="dollar-sign" class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground pointer-events-none"></i>
+                                    <input type="number" name="maxPrice" th:value="${selectedMaxPrice}" min="0" step="1"
+                                           placeholder="Max price per day"
+                                           class="w-full pl-10 pr-3 h-10 border-2 border-border rounded-md bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent">
+                                </div>
                             </div>
                         </form>
                     </div>

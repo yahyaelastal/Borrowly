@@ -28,6 +28,8 @@ public class SecurityConfig {
                 .requestMatchers("/", "/search", "/items/{id}", "/signup", "/login",
                         "/css/**", "/js/**", "/images/**", "/error",
                         "/h2-console/**").permitAll()
+                // Admin pages
+                .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
                 // Everything else requires authentication
                 .anyRequest().authenticated()
             )
