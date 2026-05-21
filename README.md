@@ -26,6 +26,60 @@ Borrowly is a peer-to-peer rental marketplace designed to maximize the utility o
 - Story B: As a platform administrator, I want to update database categories and add new item types so that the site stays organized and up to date as the platform grows.
 
 
+## 🐳 Running with Docker
 
-##Figma Design: https://glass-chuck-23706870.figma.site/
+This is the easiest way to run the full application — no Java or PostgreSQL installation needed.
+
+### Prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) installed and running
+
+### Steps
+
+**1. Clone the repository**
+```bash
+git clone <your-repo-url>
+cd Borrowly/Borrowly
+```
+
+**2. Start the application**
+```bash
+docker-compose up --build
+```
+
+This single command will:
+- Pull the **PostgreSQL 16** database image and start it
+- **Build** the Spring Boot application from source (using Maven inside Docker)
+- **Start** the app connected to the database
+
+> First run takes a few minutes while Maven downloads dependencies. Subsequent runs are much faster.
+
+**3. Open the app**
+
+Once you see `Started BorrowlyApplication` in the logs, visit:
+
+```
+http://localhost:8080
+```
+
+### Stopping the app
+
+```bash
+# Stop containers (keeps database data)
+docker-compose down
+
+# Stop and delete all data (full reset)
+docker-compose down -v
+```
+
+### Services
+
+| Service  | Container       | Port            |
+|----------|-----------------|-----------------|
+| App      | `borrowly-app`  | `8080` → `8080` |
+| Database | `borrowly-db`   | `5433` → `5432` |
+
+> The database is also accessible at `localhost:5433` with credentials `borrowly` / `borrowly123` using any PostgreSQL client (e.g. IntelliJ Database tool, DBeaver, pgAdmin).
+
+## Figma Design: https://glass-chuck-23706870.figma.site/
 
